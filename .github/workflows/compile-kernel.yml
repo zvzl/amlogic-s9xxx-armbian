@@ -80,15 +80,15 @@ jobs:
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Compile the kernel
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: zvzl/amlogic-s9xxx-armbian@main
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: kernel
-          kernel_repo: ${{ inputs.kernel_repo }}
-          kernel_version: ${{ inputs.kernel_version }}
-          kernel_auto: ${{ inputs.kernel_auto }}
+          kernel_repo: 'zvzl/linux-5.4.y@main'
+          kernel_version: 5.4.181
+          kernel_auto: false
           kernel_package: ${{ inputs.kernel_package }}
-          kernel_sign: ${{ inputs.kernel_sign }}
+          kernel_sign: '-zvzl'
           kernel_config: ${{ inputs.kernel_config }}
 
       - name: Upload Kernel to Release
